@@ -1,42 +1,71 @@
-1. Setup and Run Instructions
-Backend Setup
+# 📱 Product EMI Plans Web Application
+
+A simple **MERN stack** project that displays smartphones with multiple EMI plans.  
+Products and EMI details are stored in **MongoDB Atlas** and served via a **Node.js + Express API**.  
+The frontend is built with **React (Vite)**.
+
+---
+
+## 🚀 1. Setup and Run Instructions
+
+## 🖥 Backend Setup
+
+```bash
 cd backend
 npm install
+```
 
+---
+## Create a .env file in the backend folder and add:
 
-Create a .env file inside the backend folder and add:
+```bash
 
 MONGO_URI=your_mongodb_atlas_connection_string
 PORT=5000
 
+```
 
-Seed the database:
+# Seed the database with sample data:
+```bash
 
 npm run seed
+```
 
+# Start the backend server:
 
-Run the backend:
+```bash
 
 npm run dev
+```
 
+# Backend will run on:
 
-Backend runs on http://localhost:5000
+```bash
+http://localhost:5000
+```
 
-Frontend Setup
+# 💻 Frontend Setup
+
+```bash
+
 cd frontend
 npm install
 npm run dev
+```
 
+# Frontend will run on:
+```bash
+http://localhost:5173
+```
+# 🌐 2. API Endpoints and Example Responses
 
-Frontend runs on http://localhost:5173
-
-2. API Endpoints and Example Responses
 GET /api/products
 
-Description: Fetch all products with their variants and EMI plans.
+Fetch all products with their variants and EMI plans.
 
 Example Response:
 
+```bash
 [
   {
     "_id": "674b12345f",
@@ -65,18 +94,20 @@ Example Response:
     ]
   }
 ]
+```
+GET ```bash/api/products/:slug```
 
-GET /api/products/:slug
+Fetch a single product variant by its slug.
 
-Description: Fetch a single product variant by its slug.
+Example Request:
 
-Example:
+```bash
 
 GET /api/products/iphone-17-pro-silver-256gb
+```
+# Example Response:
 
-
-Example Response:
-
+```bash
 {
   "title": "Apple iPhone 17 Pro",
   "brand": "Apple",
@@ -92,19 +123,16 @@ Example Response:
     ]
   }
 }
-
-3. Tech Stack Used
-
-Frontend
-
+```
+# ⚙️ 3. Tech Stack Used
+## Frontend
 React (Vite)
 
 CSS
 
 Axios
 
-Backend
-
+## Backend
 Node.js
 
 Express.js
@@ -116,36 +144,40 @@ Dotenv
 Nodemon
 
 Database
-
 MongoDB Atlas
 
-4. Schema Used
-
+# 🧩 4. Schema Used
 Product Schema
+```bash
+const mongoose = require('mongoose');
 
-{
-  title: String,
+const EMIPlanSchema = new mongoose.Schema({
+  tenureMonths: { type: Number, required: true },
+  monthlyAmount: { type: Number, required: true },
+  interestRatePercent: { type: Number, required: true },
+  cashback: { type: Number, default: 0 },
+  description: { type: String }
+});
+
+const VariantSchema = new mongoose.Schema({
+  name: String,
+  color: String,
+  storage: String,
+  price: Number,
+  mrp: Number,
+  imageUrl: String,
+  slug: { type: String, required: true, unique: true },
+  emiPlans: [EMIPlanSchema]
+});
+
+const ProductSchema = new mongoose.Schema({
+  title: { type: String, required: true },
   brand: String,
   description: String,
-  baseSlug: String,
-  variants: [
-    {
-      name: String,
-      color: String,
-      storage: String,
-      price: Number,
-      mrp: Number,
-      imageUrl: String,
-      slug: String,
-      emiPlans: [
-        {
-          tenureMonths: Number,
-          monthlyAmount: Number,
-          interestRatePercent: Number,
-          cashback: Number
-        }
-      ]
-    }
-  ],
-  createdAt: Date
-}
+  baseSlug: { type: String, required: true },
+  variants: [VariantSchema],
+  createdAt: { type: Date, default: Date.now }
+});
+
+module.exports = mongoose.model('Product', ProductSchema);
+```
