@@ -1,55 +1,48 @@
-⚙️ Setup and Run Instructions
-1️⃣ Clone the repository
-git clone https://github.com/<your-username>/product-emi-app.git
-cd product-emi-app
-
-2️⃣ Backend Setup
+1. Setup and Run Instructions
+Backend Setup
 cd backend
 npm install
 
 
-Create a .env file inside /backend:
+Create a .env file inside the backend folder and add:
 
 MONGO_URI=your_mongodb_atlas_connection_string
 PORT=5000
 
-Seed the database with sample products:
+
+Seed the database:
+
 npm run seed
 
-Start the backend server:
+
+Run the backend:
+
 npm run dev
 
 
-The backend will run at:
+Backend runs on http://localhost:5000
 
-http://localhost:5000
-
-3️⃣ Frontend Setup
-cd ../frontend
+Frontend Setup
+cd frontend
 npm install
 npm run dev
 
 
-The frontend will run at:
+Frontend runs on http://localhost:5173
 
-http://localhost:5173
-
-
-Make sure your backend is running before opening the frontend.
-
-🧩 API Endpoints
-🔹 Get all products
-
+2. API Endpoints and Example Responses
 GET /api/products
 
-Response Example:
+Description: Fetch all products with their variants and EMI plans.
+
+Example Response:
 
 [
   {
     "_id": "674b12345f",
     "title": "Apple iPhone 17 Pro",
     "brand": "Apple",
-    "description": "The latest iPhone with A18 chip.",
+    "description": "Latest generation iPhone with advanced features.",
     "baseSlug": "iphone-17-pro",
     "variants": [
       {
@@ -73,16 +66,16 @@ Response Example:
   }
 ]
 
-🔹 Get product by slug
-
 GET /api/products/:slug
 
-Example Request:
+Description: Fetch a single product variant by its slug.
+
+Example:
 
 GET /api/products/iphone-17-pro-silver-256gb
 
 
-Response Example:
+Example Response:
 
 {
   "title": "Apple iPhone 17 Pro",
@@ -100,8 +93,36 @@ Response Example:
   }
 }
 
-🧾 Database Schema
+3. Tech Stack Used
+
+Frontend
+
+React (Vite)
+
+CSS
+
+Axios
+
+Backend
+
+Node.js
+
+Express.js
+
+Mongoose
+
+Dotenv
+
+Nodemon
+
+Database
+
+MongoDB Atlas
+
+4. Schema Used
+
 Product Schema
+
 {
   title: String,
   brand: String,
