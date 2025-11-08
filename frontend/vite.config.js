@@ -1,7 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+  build: {
+    outDir: 'dist', // tells Vercel where to find your production build
+  },
+  server: {
+    host: true,     // fixes "use --host to expose" log message
+    port: 5173,     // optional, ensures consistent dev behavior
+  },
+});
