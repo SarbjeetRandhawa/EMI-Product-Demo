@@ -140,6 +140,37 @@ Express.js
 
 Mongoose
 
+4. Schema Used
+
+Product Schema
+
+{
+  title: String,
+  brand: String,
+  description: String,
+  baseSlug: String,
+  variants: [
+    {
+      name: String,
+      color: String,
+      storage: String,
+      price: Number,
+      mrp: Number,
+      imageUrl: String,
+      slug: String,
+      emiPlans: [
+        {
+          tenureMonths: Number,
+          monthlyAmount: Number,
+          interestRatePercent: Number,
+          cashback: Number
+        }
+      ]
+    }
+  ],
+  createdAt: Date
+}
+
 Dotenv
 
 Nodemon
