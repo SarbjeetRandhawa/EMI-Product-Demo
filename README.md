@@ -1,75 +1,55 @@
-Product EMI Plans Web App
+⚙️ Setup and Run Instructions
+1️⃣ Clone the repository
+git clone https://github.com/<your-username>/product-emi-app.git
+cd product-emi-app
 
-This is a full-stack web application that displays products such as smartphones along with multiple EMI plans.
-The data (product details, variants, and EMI options) is stored in MongoDB Atlas and fetched dynamically through a Node.js + Express API.
-The frontend is built using React (Vite) and styled with plain CSS.
-
-1. Setup and Run Instructions
-Backend Setup
-
-Navigate to the backend folder:
-
+2️⃣ Backend Setup
 cd backend
-
-
-Install dependencies:
-
 npm install
 
 
-Create a .env file inside the backend folder and add:
+Create a .env file inside /backend:
 
 MONGO_URI=your_mongodb_atlas_connection_string
 PORT=5000
 
-
-Seed the database with sample data:
-
+Seed the database with sample products:
 npm run seed
 
-
 Start the backend server:
-
 npm run dev
 
 
-The backend will run on http://localhost:5000.
+The backend will run at:
 
-Frontend Setup
+http://localhost:5000
 
-Navigate to the frontend folder:
-
-cd frontend
-
-
-Install dependencies:
-
+3️⃣ Frontend Setup
+cd ../frontend
 npm install
-
-
-Start the frontend development server:
-
 npm run dev
 
 
-The frontend will run on http://localhost:5173.
+The frontend will run at:
 
-2. API Endpoints and Example Responses
-Get All Products
+http://localhost:5173
 
-Endpoint:
+
+Make sure your backend is running before opening the frontend.
+
+🧩 API Endpoints
+🔹 Get all products
 
 GET /api/products
 
-
-Example Response:
+Response Example:
 
 [
   {
     "_id": "674b12345f",
     "title": "Apple iPhone 17 Pro",
     "brand": "Apple",
-    "description": "Latest generation iPhone with advanced features.",
+    "description": "The latest iPhone with A18 chip.",
     "baseSlug": "iphone-17-pro",
     "variants": [
       {
@@ -93,19 +73,16 @@ Example Response:
   }
 ]
 
-Get Product by Slug
-
-Endpoint:
+🔹 Get product by slug
 
 GET /api/products/:slug
 
-
-Example:
+Example Request:
 
 GET /api/products/iphone-17-pro-silver-256gb
 
 
-Example Response:
+Response Example:
 
 {
   "title": "Apple iPhone 17 Pro",
@@ -123,27 +100,8 @@ Example Response:
   }
 }
 
-3. Tech Stack Used
-Frontend
-
-React (Vite)
-
-CSS
-
-Axios
-
-Backend
-
-Node.js
-
-Express.js
-
-Mongoose
-
-4. Schema Used
-
+🧾 Database Schema
 Product Schema
-
 {
   title: String,
   brand: String,
@@ -170,11 +128,3 @@ Product Schema
   ],
   createdAt: Date
 }
-
-Dotenv
-
-Nodemon
-
-Database
-
-MongoDB Atlas
